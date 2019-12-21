@@ -5,7 +5,7 @@ export default function AlbumCover(props) {
     return(
         <div className="album-container">
             <div className="album-title">
-                <span>{props.title}</span>
+                <span>{props.title.split('(')[0]}</span>
             </div>
             <div className="album-cover">
                 <img src={props.cover} alt={props.title} />

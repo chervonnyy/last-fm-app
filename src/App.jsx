@@ -28,7 +28,12 @@ class App extends Component {
 		fetch(`${base}?method=${method}&user=${user}&period=6month&limit=${limit}&api_key=${api_key}&format=json`)
 		  	.then(res => res.json())
 		  	.then(
-				(result) => { this.setState({ isLoaded: true, albums: result.topalbums.album })},
+				(result) => {
+					const albums = result.topalbums.album.filter(album => {
+						return album.image[3]['#text'];
+					});
+					this.setState({ isLoaded: true, albums })
+				},
 				(error) => { this.setState({ isLoaded: true, error })}
 			)
 	}
