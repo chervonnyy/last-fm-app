@@ -8,7 +8,7 @@ export default function Entry(props) {
             <input onKeyDown={event => {
                 if (event.keyCode === 13) {
                     props.handleSumbit(event.target.value);
-                    props.history.push('/grid');
+                    props.history.push('/albums');
                 }
             }}/>
         </div>

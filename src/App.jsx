@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.sass';
 
-import AlbumGrid from './components/AlbumGrid';
+
+import Albums from './components/Albums';
 import Entry from './components/Entry';
 
 class App extends Component {
@@ -20,12 +21,12 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="app">
+			<div className='app'>
 				<Switch>
 					<Route exact path='/' 
 						render={ props => <Entry handleSumbit={this.updateUsername} {...props}/> }/>
-					<Route path='/grid' 
-						render={ props => <AlbumGrid username={this.state.username} {...props}/> }/>
+					<Route path='/albums' 
+						render={ props => <Albums username={this.state.username} {...props}/> }/>
 				</Switch>
 			</div>
 		);
