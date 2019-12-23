@@ -14,24 +14,30 @@ class AlbumPage extends Component {
 
         fetch(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${apiKey}&artist=${artist}&album=${album}&format=json`)
             .then(res => res.json())
-            .then(data => this.setState({ albumData: data }))
+            .then(data => this.setState({ albumData: data.album }))
             .catch(error => console.log(error));
     }
     
     render() {
         const { artist, album } = this.props.location.state;
-        console.log(this.state.albumData);
+        const albumData = this.state.albumData;
+        console.log(albumData);
 
         return (
             <div className='album-page'>
                 <h2>{artist} — {album}</h2>
                 {this.state.albumData &&
                     <div className='album-info'>
-                        <div class='album-info__cover'>
-                            <img src={this.state.albumData.album.image[4]['#text']} alt={album} />
+                        <div className="album-info__main">
+                            <div className='album-info__cover'>
+                                <img src={albumData.image[4]['#text']} alt={album} />
+                            </div>
+                            <ul className='album-info__tracklist'>
+                                {albumData.tracks.track.map((track, index) => <li key={index}>{track.name}</li>)}
+                            </ul>
                         </div>
-                        <div class='album-info__summary'>
-                            <p>{this.state.albumData.album.wiki.summary.split('<a href')[0]}</p>
+                        <div className='album-info__summary'>
+                            {albumData.wiki && <p>{albumData.wiki.summary.split('<a href')[0]}</p>}
                         </div>
                     </div>
                 }

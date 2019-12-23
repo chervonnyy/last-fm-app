@@ -16,8 +16,8 @@ class AlbumsGrid extends Component {
     getTopAlbums = user => {
 		const base = 'http://ws.audioscrobbler.com/2.0/';
 		const method = 'user.gettopalbums';
-		const limit = 100;
-		const period = 'overall';
+		const limit = 20;
+		const period = '6month';
         const apiKey = '7600702bed449a1234d7fe6d22c880a2';
         
         if (!user) {
@@ -42,13 +42,12 @@ class AlbumsGrid extends Component {
     
     render() {
         const { albums, error } = this.state;
-
-        console.log(this);
-
+        const username = this.props.username;
+    
         const headers = {
             error: `Error: ${error}`,
-            loading: `Albums for ${this.props.username} is loading...`,
-            albums: `Here is a list of a ${this.props.username}'s top albums`,
+            loading: `Albums for ${username} is loading...`,
+            albums: `Here is a list of a ${username}'s top albums`,
         }
 
         let header;
@@ -57,7 +56,7 @@ class AlbumsGrid extends Component {
             header = error ? headers.error : headers.albums;
         } else {
             header = headers.loading;
-            this.getTopAlbums(this.props.username);
+            this.getTopAlbums(username);
         }
 
         return(
