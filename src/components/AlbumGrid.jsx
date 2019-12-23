@@ -9,8 +9,7 @@ class AlbumGrid extends Component {
 		
 		this.state = {
 			error: null,
-		  	isLoaded: false,
-			albums: []
+			albums: null
 		};
 	}
 
@@ -19,42 +18,58 @@ class AlbumGrid extends Component {
 		const method = 'user.gettopalbums';
 		const limit = 100;
 		const period = 'overall';
-		const api_key = '7600702bed449a1234d7fe6d22c880a2';
+        const api_key = '7600702bed449a1234d7fe6d22c880a2';
+        
+        if (!user) {
+            this.setState({ error: 'User is not provided' });
+            return true;
+        }
 
 		fetch(`${base}?method=${method}&user=${user}&period=${period}&limit=${limit}&api_key=${api_key}&format=json`)
 		  	.then(res => res.json())
 		  	.then(result => {
 				if (result.error) {
-                    this.setState({ isLoaded: true, error: result.error });
+                    this.setState({ error: result.message });
 				} else {
 					const albums = result.topalbums.album.filter(album => {
-						return album.image[3]['#text'];
+						return album.image[0]['#text'];
 					});
-					this.setState({ isLoaded: true, albums });
+					this.setState({ albums });
 				}
-            }, error => { this.setState({ isLoaded: true, error })}
-        );
+            })
+            .catch(error => { this.setState({ error: error.message })});
     }
     
     render() {
+        const { albums, error } = this.state;
 
-        this.getTopAlbums(this.props.username);
+        const headers = {
+            error: `Error: ${error}`,
+            loading: `Albums for ${this.props.username} is loading...`,
+            albums: `Here is a list of a ${this.props.username}'s top albums`,
+        }
 
-        const { albums, isLoaded, error } = this.state;
+        let header;
+
+        if (albums || error) {
+            header = error ? headers.error : headers.albums;
+        } else {
+            header = headers.loading;
+            this.getTopAlbums(this.props.username);
+        }
 
         return(
-            <div className='album-grid'>
-                {error && <h2>Error: {error.message}</h2>}
-                {!isLoaded && <h2>Loading...</h2>}
-                {albums && 
-                    albums.map((album, index) => 
+            <div>
+                <h1>{header}</h1>
+                <div className='album-grid'>
+                    {albums && albums.map((album, index) => 
                         <AlbumCover 
                             cover = {album.image[3]['#text']}
                             title = {album.name}
                             key = {index}
                         />
-                    )
-                }
+                    )}
+                </div>  
             </div>
         );
     }
@@ -63,6 +78,5 @@ class AlbumGrid extends Component {
 export default AlbumGrid;
 
 AlbumGrid.propTypes = {
-    albums: propTypes.arrayOf(propTypes.object).isRequired,
-    size: propTypes.number.isRequired
+    albums: propTypes.string.isRequired.isRequired
 }

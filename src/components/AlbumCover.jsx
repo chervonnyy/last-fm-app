@@ -8,7 +8,7 @@ export default function AlbumCover(props) {
                 <span>{props.title.split('(')[0]}</span>
             </div>
             <div className="album-cover">
-                <img src={props.cover} alt={props.title} />
+                <img src={props.cover} alt={props.title} loading="lazy" />
             </div>
         </div>
     )

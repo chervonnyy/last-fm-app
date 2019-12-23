@@ -10,10 +10,7 @@ class App extends Component {
 		super(props);
 		
 		this.state = {
-			error: null,
-		  	isLoaded: false,
-			albums: [],
-			username: null  
+			username: ''  
 		};
 	}
 
@@ -21,18 +18,18 @@ class App extends Component {
 		this.setState({ username });
 	}
 
-
 	render() {
 		return (
-			<Switch>
-				<Route exact path='/' 
-					render={ props => <Entry handleChange={this.updateUsername} {...props}/> }/>
-				<Route path='/grid' 
-					render={ props => <AlbumGrid username={this.state.username} {...props}/> }/>
-			</Switch>
+			<div className="app">
+				<Switch>
+					<Route exact path='/' 
+						render={ props => <Entry handleSumbit={this.updateUsername} {...props}/> }/>
+					<Route path='/grid' 
+						render={ props => <AlbumGrid username={this.state.username} {...props}/> }/>
+				</Switch>
+			</div>
 		);
 	}
-
 }
 
 export default App;
