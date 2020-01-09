@@ -55,7 +55,7 @@
     &:hover
         .album-cover,
         .album-title
-            transform: scale(1)
+            // transform: scale(1)
 
     .album-cover
         position: relative
@@ -133,17 +133,21 @@
         width: 70%
         margin: 20px auto
         font-size: 24px
+section
+    height: 100vh
+    width: 100%
 
 .parallax
     perspective: 1px
-    height: 100vh
+    height: 100%
     overflow-x: hidden
     overflow-y: auto
-    background: yellow
+    background: white
 
     &__group
+        margin-bottom: 500px
         position: relative
-        height: 100vh
+        height: 500px
         transform-style: preserve-3d
             
     &__layer
@@ -158,13 +162,27 @@
 
         &--back
             width: 100%
-            height: 100vh
+            height: 500px
             background-size: 400% 400%
-            animation: gradientBG 20s ease infinite
+            animation: gradientBG 5s ease infinite
+            transform: translateZ(-1px) scale(1.5)
+            overflow: hidden
+
+            &::after
+                content: '' 
+                display: block
+                top: 0
+                bottom: 0
+                right: 0
+                left: 0
+                width: 100%
+                height: 100%
+                background: url('https://shorturl.at/noswP') center center no-repeat
+
 
         &--brown
             background-image: linear-gradient(-45deg, #c94b4b, #4b134f)
-
+        
         &--orange
             background-image: linear-gradient(-45deg, #fc4a1a, #f7b733)
 
@@ -174,10 +192,4 @@
         &--manuel
             background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)
 
-
-            // top: 0
-            // transform: translateZ(-1px) scale(2)
-            // background: url('https://glide-media-cloud.s3-accelerate.amazonaws.com/2019/10/Thundercat3.jpg');
-            // background-position: center center
-            // background-size: cover
         

@@ -48,7 +48,8 @@ class AlbumsGrid extends Component {
 
     getClassName = () => {
         const classNames = ['brown', 'orange', 'aqua', 'manuel'];
-        return 'parallax__layer--aqua';
+        const randomIndex = Math.floor(Math.random() * classNames.length);
+        return `parallax__layer parallax__layer--back parallax__layer--${classNames[randomIndex]}`;
     }
     
     render() {
@@ -77,10 +78,10 @@ class AlbumsGrid extends Component {
                 <h2>{header}</h2>
                 <div className='albums parallax'>
                     {albums && albums.map(collection => {
-                        // const className = this.getClassName();
+                        const className = this.getClassName();
                         return (
                             <div className="parallax__group parallax__group">
-                                <div className="parallax__layer parallax__layer--back"></div>
+                                <div className={className}></div>
                                 <div className="albums__grid parallax__layer parallax__layer--base">
                                     {collection.map((album, index) => 
                                         <AlbumCover 
