@@ -33,11 +33,22 @@ class AlbumsGrid extends Component {
 				} else {
 					const albums = result.topalbums.album.filter(album => {
 						return album.image[0]['#text'];
-					});
-					this.setState({ albums });
+                    });
+                    
+                    const albumsCollection = albums.reduce((acc, album) => {
+                        const items = acc.filter(item => !Array.isArray(item));
+                        const collections = acc.filter(item => Array.isArray(item));
+                        return (items.length === 5) ? [...collections, items] : [...acc, album];
+                    }, []).filter(item => Array.isArray(item));
+					this.setState({ albums: albumsCollection });
 				}
             })
             .catch(error => { this.setState({ error: error.message })});
+    }
+
+    getClassName = () => {
+        const classNames = ['brown', 'orange', 'aqua', 'manuel'];
+        return 'parallax__layer--aqua';
     }
     
     render() {
@@ -59,20 +70,33 @@ class AlbumsGrid extends Component {
             this.getTopAlbums(username);
         }
 
-        return(
-            <div>
+        console.log(this.state);
+
+        return (
+            <section>
                 <h2>{header}</h2>
-                <div className='album-grid'>
-                    {albums && albums.map((album, index) => 
-                        <AlbumCover 
-                            cover = {album.image[3]['#text']}
-                            artist= {album.artist.name}
-                            title = {album.name}
-                            key = {index}
-                        />
+                <div className='albums parallax'>
+                    {albums && albums.map(collection => {
+                        // const className = this.getClassName();
+                        return (
+                            <div className="parallax__group parallax__group">
+                                <div className="parallax__layer parallax__layer--back"></div>
+                                <div className="albums__grid parallax__layer parallax__layer--base">
+                                    {collection.map((album, index) => 
+                                        <AlbumCover 
+                                            cover={album.image[3]['#text']}
+                                            artist={album.artist.name}
+                                            title={album.name}
+                                            key={index}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        )
+                    }   
                     )}
                 </div>  
-            </div>
+            </section>
         );
     }
 }
