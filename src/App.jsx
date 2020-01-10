@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.sass';
 
-import Home from './pages/Home';
+import Main from './pages/Main';
 import Entry from './pages/Entry';
 
 class App extends Component {
@@ -19,15 +19,17 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(this.state);
 		return (
-			<div className='app'>
-				<Switch>
-					<Route exact path='/' 
-						render={ props => <Entry handleSumbit={this.updateUsername} {...props}/> }/>
-					<Route path='/home' 
-						render={ props => <Home username={this.state.username} {...props}/> }/>
-				</Switch>
-			</div>
+			<Switch>
+				<Route exact path="/" 
+					render={props => <Main username={this.state.username} {...props}/>}>
+						{(!this.state.username) && <Redirect push to='/entry' />}
+				</Route>
+				<Route path='/entry' 
+					render={props => <Entry handleSumbit={this.updateUsername} {...props}/>}>
+				</Route>
+			</Switch>
 		);
 	}
 }

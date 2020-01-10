@@ -49,10 +49,11 @@ class AlbumsGrid extends Component {
     getClassName = () => {
         const classNames = ['brown', 'orange', 'aqua', 'manuel'];
         const randomIndex = Math.floor(Math.random() * classNames.length);
-        return `${classNames[randomIndex]}`;
+        return classNames[randomIndex];
     }
     
     render() {
+        console.log(this.props);
         const { albums, error } = this.state;
         const username = this.props.username;
     

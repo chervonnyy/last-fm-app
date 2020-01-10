@@ -4,11 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import AlbumsGrid from '../components/AlbumsGrid';
 
-export default function Home(props) {
+export default function Recommnedations(props) {
     const subtitle = props.username ? `username is ${props.username}` : 'username is not provided';
     return (
         <div>
-            <h3>home</h3>
+            <h3>recos</h3>
         </div>
     );
 };
