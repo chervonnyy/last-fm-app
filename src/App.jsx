@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.sass';
 
 import Main from './pages/Main';
-import Entry from './pages/Entry';
+import LoginPage from './pages/LoginPage/LoginPage';
+import Header from './components/Header/Header';
 
 class App extends Component {
 	constructor(props) {
@@ -19,18 +19,18 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.state);
-		return (
-			<Switch>
-				<Route exact path="/" 
-					render={props => <Main username={this.state.username} {...props}/>}>
-						{(!this.state.username) && <Redirect push to='/entry' />}
-				</Route>
-				<Route path='/entry' 
-					render={props => <Entry handleSumbit={this.updateUsername} {...props}/>}>
-				</Route>
-			</Switch>
-		);
+
+		const isLogged = !!this.state.username;
+		const HomePage = () => {
+			return(
+				<div className='app'>
+					<Header title='Album picker' subtitle={`Hello ${this.state.username}!`} resetValue={this.updateUsername} />
+					<Main username={this.state.username} />
+				</div>
+			)
+		}
+
+		return isLogged ? <HomePage /> : <LoginPage handleSumbit={this.updateUsername} />;
 	}
 }
 

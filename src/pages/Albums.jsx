@@ -5,7 +5,6 @@ import AlbumsGrid from '../components/AlbumsGrid';
 import AlbumPage from '../components/AlbumPage';
 
 export default function Albums(props) {
-    console.log(props);
     return (
         <div>
             <Switch>

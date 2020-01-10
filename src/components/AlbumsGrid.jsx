@@ -76,7 +76,7 @@ class AlbumsGrid extends Component {
 
         return (
             <section>
-                <h2>{header}</h2>
+                {/* <h2>{header}</h2> */}
                 <div className='albums parallax'>
                     {albums && albums.map(collection => {
                         const className = this.getClassName();
