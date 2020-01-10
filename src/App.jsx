@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.sass';
 
-
 import Albums from './components/Albums';
 import Entry from './components/Entry';
 

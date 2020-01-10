@@ -8,7 +8,7 @@ import AlbumPage from './AlbumPage';
 export default function Albums(props) {
     return (
         <div>
-            <Header pageTitle='Album picker'/>
+            <Header title='Album picker' subtitle={props.username || 'username is not provided'}/>
             <Switch>
                 <Route exact path='/albums' 
                     render = { data => <AlbumsGrid username={props.username} {...data}/> }/>
