@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.sass';
 
-import Albums from './components/Albums';
-import Entry from './components/Entry';
+import Home from './pages/Home';
+import Entry from './pages/Entry';
 
 class App extends Component {
 	constructor(props) {
@@ -24,8 +24,8 @@ class App extends Component {
 				<Switch>
 					<Route exact path='/' 
 						render={ props => <Entry handleSumbit={this.updateUsername} {...props}/> }/>
-					<Route path='/albums' 
-						render={ props => <Albums username={this.state.username} {...props}/> }/>
+					<Route path='/home' 
+						render={ props => <Home username={this.state.username} {...props}/> }/>
 				</Switch>
 			</div>
 		);

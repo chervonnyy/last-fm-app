@@ -10,13 +10,16 @@ export default function Header(props) {
             <h2 className="header__subtitle">{props.subtitle}</h2>
             <ul className="header__navigation">
                 <li className="header__navigation-link">
-                    <Link to={'/'}>Home</Link>
+                    <Link to={'/home'}>Home</Link>
                 </li>
                 <li className="header__navigation-link">
                     <Link to={'/albums'}>Albums</Link>
                 </li>
                 <li className="header__navigation-link">
                     <Link to={'/recommendations'}>Recommendations</Link>
+                </li>
+                <li className="header__navigation-link">
+                    <Link to={'/'}>Change username</Link>
                 </li>
             </ul>
         </header>
