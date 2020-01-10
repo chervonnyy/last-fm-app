@@ -1,20 +1,14 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
+import Header from './Header/Header';
 import AlbumsGrid from './AlbumsGrid';
 import AlbumPage from './AlbumPage';
 
 export default function Albums(props) {
-
-    // const username = props.username;
-
     return (
         <div>
-            <header>
-                <Link to={'/'}>Home</Link>
-                <h1>Albums</h1>
-                <Link to={'/albums'}>Albums</Link>
-            </header>
+            <Header pageTitle='Album picker'/>
             <Switch>
                 <Route exact path='/albums' 
                     render = { data => <AlbumsGrid username={props.username} {...data}/> }/>
