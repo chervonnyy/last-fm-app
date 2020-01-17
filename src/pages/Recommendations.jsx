@@ -1,9 +1,9 @@
 import React from 'react';
 
+import RecommendationCloud from '../components/RecommendationCloud/RecommendationCloud';
+
 export default function Recommnedations(props) {
     return (
-        <div>
-            <h3>recos</h3>
-        </div>
+        <RecommendationCloud username={props.username} />
     );
 };

@@ -9,7 +9,8 @@ export default function Main(props) {
         <Switch>
             <Route path='/albums' 
                 render = { data => <Albums username={props.username} {...data}/> } />
-            <Route path = '/recommendations' component={Recommendations} />
+            <Route path='/recommendations' 
+                render = { data => <Recommendations username={props.username} {...data}/> } />
         </Switch>
     );
 };
