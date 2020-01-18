@@ -18,7 +18,7 @@ export default class RecommendationCloud extends Component {
     async componentDidMount() {
         const response = await apiCall('user.getTopTags', this.props.username);
         const result = await response.json();
-        this.setState({ tags: result, isLoaded: false });
+        this.setState({ tags: result, isLoaded: true });
     }
 
     render() {

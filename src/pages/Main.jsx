@@ -6,11 +6,13 @@ import Recommendations from './Recommendations';
 
 export default function Main(props) {
     return (
-        <Switch>
-            <Route path='/albums' 
-                render = { data => <Albums username={props.username} {...data}/> } />
-            <Route path='/recommendations' 
-                render = { data => <Recommendations username={props.username} {...data}/> } />
-        </Switch>
+        <section>
+            <Switch>
+                <Route path='/albums' 
+                    render = { data => <Albums username={props.username} {...data}/> } />
+                <Route path='/recommendations' 
+                    render = { data => <Recommendations username={props.username} {...data}/> } />
+            </Switch>
+        </section>
     );
 };

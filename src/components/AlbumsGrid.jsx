@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 
 import AlbumCover from './AlbumCover';
+import Preloader from './Preloader/Preloader';
+
+import apiCall from '../assets/scripts/apiCall';
 
 class AlbumsGrid extends Component {
 	constructor(props) {
@@ -9,41 +12,26 @@ class AlbumsGrid extends Component {
 		
 		this.state = {
 			error: null,
-			albums: null
+            albums: null,
+            isLoaded: false
 		};
-	}
+    }
+    
+    async componentDidMount() {
+        const response = await apiCall('user.gettopalbums', this.props.username);
+        const result = await response.json();
+        this.setState({ albums: this.getAlbumsCollection(result), isLoaded: true });
+    }
 
-    getTopAlbums = user => {
-		const base = 'http://ws.audioscrobbler.com/2.0/';
-		const method = 'user.gettopalbums';
-		const limit = 20;
-		const period = 'overall';
-        const apiKey = '7600702bed449a1234d7fe6d22c880a2';
-        
-        if (!user) {
-            this.setState({ error: 'User is not provided' });
-            return true;
-        }
-
-		fetch(`${base}?method=${method}&user=${user}&period=${period}&limit=${limit}&api_key=${apiKey}&format=json`)
-		  	.then(res => res.json())
-		  	.then(result => {
-				if (result.error) {
-                    this.setState({ error: result.message });
-				} else {
-					const albums = result.topalbums.album.filter(album => {
-						return album.image[0]['#text'];
-                    });
-                    
-                    const albumsCollection = albums.reduce((acc, album) => {
-                        const items = acc.filter(item => !Array.isArray(item));
-                        const collections = acc.filter(item => Array.isArray(item));
-                        return (items.length === 5) ? [...collections, items] : [...acc, album];
-                    }, []).filter(item => Array.isArray(item));
-					this.setState({ albums: albumsCollection });
-				}
-            })
-            .catch(error => { this.setState({ error: error.message })});
+    getAlbumsCollection = albums => {
+        const albumsCollection = albums.topalbums.album.filter(album => {
+            return album.image[0]['#text'];
+        }).reduce((acc, album) => {
+            const items = acc.filter(item => !Array.isArray(item));
+            const collections = acc.filter(item => Array.isArray(item));
+            return (items.length === 5) ? [...collections, items] : [...acc, album];
+        }, []).filter(item => Array.isArray(item));
+        return albumsCollection;
     }
 
     getClassName = () => {
@@ -51,32 +39,27 @@ class AlbumsGrid extends Component {
         const randomIndex = Math.floor(Math.random() * classNames.length);
         return classNames[randomIndex];
     }
-    
-    render() {
-        console.log(this.props);
-        const { albums, error } = this.state;
-        const username = this.props.username;
-    
+
+    getHeader = username => {
+        const { albums, error, isLoaded } = this.state;
         const headers = {
-            error: `Error: ${error}`,
+            error: `Error: ${username}`,
             loading: `Albums for ${username} is loading...`,
             albums: `Here is a list of a ${username}'s top albums`,
         }
 
-        let header;
-
         if (albums || error) {
-            header = error ? headers.error : headers.albums;
+            return error ? headers.error : headers.albums;
         } else {
-            header = headers.loading;
-            this.getTopAlbums(username);
+            return headers.loading;
         }
+    }
+    
+    render() {
+        const { albums, isLoaded } = this.state;
+        const header = this.getHeader(this.props.username);
 
-        console.log(this.state);
-
-        return (
-            <section>
-                {/* <h2>{header}</h2> */}
+        return (!isLoaded ?  <Preloader /> :
                 <div className='albums parallax'>
                     {albums && albums.map(collection => {
                         const className = this.getClassName();
@@ -97,8 +80,7 @@ class AlbumsGrid extends Component {
                         )
                     }   
                     )}
-                </div>  
-            </section>
+                </div>
         );
     }
 }

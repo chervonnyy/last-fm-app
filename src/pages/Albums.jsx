@@ -6,13 +6,11 @@ import AlbumPage from '../components/AlbumPage';
 
 export default function Albums(props) {
     return (
-        <div>
-            <Switch>
-                <Route exact path='/albums' 
-                    render = { data => <AlbumsGrid username={props.username} {...data}/> }/>
-                <Route path='/albums/:album' 
-                    render = { data => <AlbumPage {...data}/> }/>
-            </Switch>
-        </div>
+        <Switch>
+            <Route exact path='/albums' 
+                render = { data => <AlbumsGrid username={props.username} {...data}/> }/>
+            <Route path='/albums/:album' 
+                render = { data => <AlbumPage {...data}/> }/>
+        </Switch>
     );
 };

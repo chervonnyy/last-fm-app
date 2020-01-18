@@ -6,11 +6,10 @@ import './Header.sass';
 
 
 export default function Header(props) {
-    // const logoSrc = 'https://c7.uihere.com/icons/299/623/810/lastfm-square-9786c6ef35510e0624bb82e77b565a12.png';
     const logo = <img src={svg} alt='last.fm logo' width='50px' height='50px' />
     return (
         <header className="header">
-            <h1 className="header__title">B{svg}tard</h1>
+            <h1 className="header__title">Last.fm album picker</h1>
             <h2 className="header__subtitle">{props.subtitle}</h2>
             <ul className="header__navigation">
                 <li className="header__navigation-link">
