@@ -22,7 +22,7 @@ const LoginPage = props => {
                 <input
                     className="login-page__input"
                     placeholder="type your last.fm username here" 
-                    value={props.username}
+                    // value={props.username}
                     onKeyDown={event => {
                         if (event.keyCode === 13) {
                             props.setUsername(event.target.value);

@@ -3,9 +3,7 @@ export default (method, user) => {
     const apiKey = '7600702bed449a1234d7fe6d22c880a2';
     const query = user ? `method=${method}&user=${user}` : `method=${method}`;
 
-    return fetch(`${base}?${query}&api_key=${apiKey}&format=json`)
-        .then(responce => responce.json());
-        //   .then(response => response.json())
+    return fetch(`${base}?${query}&api_key=${apiKey}&format=json`).then(response => response.json())
         //   .then(result => {
         //     if (result.error) {
         //         // this.setState({ error: result.message });

@@ -3,22 +3,18 @@ import { connect } from 'react-redux';
 
 import FriendList from '../components/FriendList/FriendList';
 import Preloader from '../components/Preloader/Preloader';
-
 import { updateFriendList } from '../store/Friends/actions';
-import { setUsername } from '../store/actions';
-
 import apiCall from '../assets/scripts/apiCall';
 
 const mapStateToProps = state => {
     return {
-        username: state.app.username,
-        friendList: state.friends.friendList
+        friendList: state.friends.friendList,
+        username: state.app.username
     }
 }
 
 const mapDispatchToProps = {
-    updateFriendList,
-    setUsername
+    updateFriendList
 }
 
 function Friends(props) {

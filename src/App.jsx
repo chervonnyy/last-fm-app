@@ -29,6 +29,7 @@ class App extends Component {
 		if (this.props.username) {
 			console.log(this.props.username);
 		}
+		
 		const isLogged = !!this.props.username
 		const HomePage = () => {
 			return (

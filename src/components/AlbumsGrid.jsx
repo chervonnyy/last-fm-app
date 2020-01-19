@@ -17,10 +17,13 @@ class AlbumsGrid extends Component {
 		};
     }
     
-    async componentDidMount() {
-        const response = await apiCall('user.gettopalbums', this.props.username);
-        const result = await response.json();
-        this.setState({ albums: this.getAlbumsCollection(result), isLoaded: true });
+    componentDidMount() {
+        const response = async () => await apiCall('User.gettopalbums', this.props.username);
+        response().then(response => {
+            this.setState({ albums: this.getAlbumsCollection(response), isLoaded: true });
+        });
+
+       
     }
 
     getAlbumsCollection = albums => {
