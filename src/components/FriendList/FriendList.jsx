@@ -1,14 +1,19 @@
 import React from 'react';
-
+import UserCard from '../UserCard/UserCard';
 import './FriendList.sass';
 
 export default function FriendList(props) {
-
-    console.log(props)
-
     return (
-        <ul>
-            {props.friends.map(friend => <li>{friend.name}</li>)}
-        </ul>
+        <div className="friend-list">
+            {props.friends.map((friend, index) => (
+                <UserCard 
+                    key={index} 
+                    name={friend.name}
+                    realname={friend.realname}
+                    country={friend.country}
+                    image={friend.image[1]['#text']}
+                />
+            ))}
+        </div>
     );
 };
