@@ -1,14 +1,12 @@
-const CHANGE_USERNAME = 'CHANGE_USERNAME';
-const CHANGE_LOADING_STATUS = 'CHANGE_LOADING_STATUS';
+export const CHANGE_USERNAME = 'CHANGE_USERNAME';
+export const CHANGE_LOADING_STATUS = 'CHANGE_LOADING_STATUS';
 
-const setUsername = username => ({
+export const setUsername = username => ({
     type: CHANGE_USERNAME,
     payload: username
 });
 
-const setLoadingStatus = loadingStatus => ({
+export const setLoadingStatus = loading => ({
     type: CHANGE_LOADING_STATUS,
-    payload: loadingStatus
+    payload: loading
 });
-
-export { CHANGE_USERNAME, CHANGE_LOADING_STATUS, setUsername, setLoadingStatus}

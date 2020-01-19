@@ -23,7 +23,6 @@ export default class RecommendationCloud extends Component {
 
     render() {
         const { tags, isLoaded } = this.state;
-        console.log(tags);
 
         return(
             <div className="recommendations">

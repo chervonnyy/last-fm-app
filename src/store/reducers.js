@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { CHANGE_USERNAME, CHANGE_LOADING_STATUS } from './actions';
+import friendsReducer from './Friends/reducers';
 
 const defaultState = {
     username: null,
@@ -7,7 +8,6 @@ const defaultState = {
 }
 
 const appReducer = (state = defaultState, action) => {
-    console.log(state);
     switch(action.type) {
         case CHANGE_USERNAME: 
             return { ...state, username: action.payload }
@@ -19,5 +19,6 @@ const appReducer = (state = defaultState, action) => {
 }
 
 export default combineReducers({
-    app: appReducer
+    app: appReducer,
+    friends: friendsReducer
 });

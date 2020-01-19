@@ -18,6 +18,9 @@ export default function Header(props) {
                 <li className="header__navigation-link">
                     <Link to='/recommendations'>Recommendations</Link>
                 </li>
+                <li className="header__navigation-link">
+                    <Link to='/friends'>Friends</Link>
+                </li>
                 <li className="header__navigation-link" onClick={() => props.resetValue('')}>
                     Change username
                 </li>
