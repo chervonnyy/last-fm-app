@@ -22,8 +22,6 @@ class AlbumsGrid extends Component {
         response().then(response => {
             this.setState({ albums: this.getAlbumsCollection(response), isLoaded: true });
         });
-
-       
     }
 
     getAlbumsCollection = albums => {

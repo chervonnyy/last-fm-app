@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setUsername } from './store/actions';
+import { setUsername, setHeader } from './store/actions';
  
 import Main from './pages/Main';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -10,12 +10,14 @@ import './App.sass';
 
 const mapStateToProps = state => {
     return {
-        username: state.app.username
+		username: state.app.username,
+		header: state.app.header
     }
 }
 
 const mapDispatchToProps = {
-    setUsername
+	setUsername,
+	setHeader
 }
 
 
@@ -27,14 +29,14 @@ class App extends Component {
 	render() {
 
 		if (this.props.username) {
-			console.log(this.props.username);
+			this.props.setHeader(`Welcome ${this.props.username}`);
 		}
-		
+
 		const isLogged = !!this.props.username
 		const HomePage = () => {
 			return (
 				<div className='app'>
-					<Header subtitle={`Hello ${this.props.username}!`} resetValue={this.props.setUsername} />
+					<Header subtitle={this.props.header} resetValue={this.props.setUsername} />
 					<Main username={this.props.username} />
 				</div>
 			)

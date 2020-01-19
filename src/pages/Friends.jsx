@@ -4,26 +4,32 @@ import { connect } from 'react-redux';
 import FriendList from '../components/FriendList/FriendList';
 import Preloader from '../components/Preloader/Preloader';
 import { updateFriendList } from '../store/Friends/actions';
+import { setHeader } from '../store/actions';
 import apiCall from '../assets/scripts/apiCall';
 
 const mapStateToProps = state => {
     return {
         friendList: state.friends.friendList,
-        username: state.app.username
+        username: state.app.username,
+        header: state.app.header
     }
 }
 
 const mapDispatchToProps = {
-    updateFriendList
+    updateFriendList,
+    setHeader
 }
 
 function Friends(props) {
-
     function getFriends() {
         const userFriends = async () => await apiCall('User.getFriends', props.username);
-        userFriends().then(response => {
-            props.updateFriendList(response.friends.user);
-        });
+        userFriends()
+            .then(response => {
+                if (!response.error) {
+                    props.updateFriendList(response.friends.user);
+                    props.setHeader(`Here is a list of ${props.username} friends`);
+                }
+            });
     }
 
     const hasFriends = !!props.friendList.length;
