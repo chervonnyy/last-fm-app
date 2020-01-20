@@ -21,9 +21,6 @@ const mapDispatchToProps = {
 }
 
 class App extends Component {
-
-	getUsername = () => this.props.username;
-
 	render() {
 
 		if (this.props.username) {
