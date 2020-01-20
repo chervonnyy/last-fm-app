@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import FriendList from '../components/FriendList/FriendList';
 import Preloader from '../components/Preloader/Preloader';
-import { updateFriendList } from '../store/Friends/actions';
+import { loadFriendList } from '../store/Friends/actions';
 import { setHeader } from '../store/actions';
 import apiCall from '../assets/scripts/apiCall';
 
@@ -16,26 +16,27 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    updateFriendList,
+    loadFriendList,
     setHeader
 }
 
 function Friends(props) {
-    function getFriends() {
-        const userFriends = async () => await apiCall('User.getFriends', props.username);
-        userFriends()
-            .then(response => {
-                if (!response.error) {
-                    props.updateFriendList(response.friends.user);
-                    props.setHeader(`Here is a list of ${props.username} friends`);
-                }
-            });
-    }
+    
+// /
+    //     const userFriends = async () => await apiCall('User.getFriends', props.username);
+    //     userFriends()
+    //         .then(response => {
+    //             if (!response.error) {
+    //                 props.loadFriendList(response.friends.user);
+    //                 props.setHeader(`Here is a list of ${props.username} friends`);
+    //             }
+    //         });
+    // }
 
     const hasFriends = !!props.friendList.length;
     
     if (!hasFriends) {
-        getFriends()
+        props.loadFriendList();
     }
 
     return hasFriends ? <FriendList friends={props.friendList} /> : <Preloader />

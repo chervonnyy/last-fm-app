@@ -4,25 +4,4 @@ export default (method, user) => {
     const query = user ? `method=${method}&user=${user}` : `method=${method}`;
 
     return fetch(`${base}?${query}&api_key=${apiKey}&format=json`).then(response => response.json())
-        //   .then(result => {
-        //     if (result.error) {
-        //         // this.setState({ error: result.message });
-        //         console.error(`error ${result.error}`);
-        //     } else {
-        //         console.log(result);
-        //         // const albums = result.topalbums.album.filter(album => {
-        //         //     return album.image[0]['#text'];
-        //         // });
-                
-        //         // const albumsCollection = albums.reduce((acc, album) => {
-        //         //     const items = acc.filter(item => !Array.isArray(item));
-        //         //     const collections = acc.filter(item => Array.isArray(item));
-        //         //     return (items.length === 5) ? [...collections, items] : [...acc, album];
-        //         // }, []).filter(item => Array.isArray(item));
-        //         // this.setState({ albums: albumsCollection });
-        //         await
-        //     }
-        // })
-        // // .catch(error => { this.setState({ error: error.message })});
-        // .catch(error => console.error(`error ${error}`));
 }

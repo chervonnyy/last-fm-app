@@ -20,11 +20,9 @@ const mapDispatchToProps = {
 	setHeader
 }
 
-
 class App extends Component {
-	constructor(props) {
-		super(props);
-	}
+
+	getUsername = () => this.props.username;
 
 	render() {
 
