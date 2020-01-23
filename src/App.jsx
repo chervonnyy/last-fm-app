@@ -23,7 +23,7 @@ const mapDispatchToProps = {
 class App extends Component {
 	render() {
 
-		if (this.props.username) {
+		if (this.props.username && !this.props.header) {
 			this.props.setHeader(`Welcome ${this.props.username}`);
 		}
 

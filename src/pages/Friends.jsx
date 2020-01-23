@@ -5,7 +5,6 @@ import FriendList from '../components/FriendList/FriendList';
 import Preloader from '../components/Preloader/Preloader';
 import { loadFriendList } from '../store/Friends/actions';
 import { setHeader } from '../store/actions';
-import apiCall from '../assets/scripts/apiCall';
 
 const mapStateToProps = state => {
     return {
@@ -21,22 +20,13 @@ const mapDispatchToProps = {
 }
 
 function Friends(props) {
-    
-// /
-    //     const userFriends = async () => await apiCall('User.getFriends', props.username);
-    //     userFriends()
-    //         .then(response => {
-    //             if (!response.error) {
-    //                 props.loadFriendList(response.friends.user);
-    //                 props.setHeader(`Here is a list of ${props.username} friends`);
-    //             }
-    //         });
-    // }
 
     const hasFriends = !!props.friendList.length;
     
     if (!hasFriends) {
         props.loadFriendList();
+    } else {
+        props.setHeader(`Here is a list of ${props.username}'s friends`);
     }
 
     return hasFriends ? <FriendList friends={props.friendList} /> : <Preloader />
