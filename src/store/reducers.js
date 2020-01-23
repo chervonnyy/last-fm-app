@@ -11,15 +11,17 @@ const defaultState = {
 const appReducer = (state = defaultState, action) => {
     switch(action.type) {
         case CHANGE_USERNAME: 
-            return { ...state, username: action.payload }
+            return { ...defaultState ,username: action.payload }
 
         case CHANGE_HEADER:
                 return { ...state, header: action.payload }
 
         case CHANGE_LOADING_STATUS: 
             return { ...state, isLoaded: action.payload }
+
+        default:
+            return state;
     }
-    return state;
 }
 
 export default combineReducers({
