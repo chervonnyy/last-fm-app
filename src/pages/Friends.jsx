@@ -8,25 +8,25 @@ import { setHeader } from '../store/actions';
 
 const mapStateToProps = state => {
     return {
-        friendList: state.friends.friendList,
         username: state.app.username,
-        header: state.app.header
+        header: state.app.header,
+        friendList: state.friends.friendList
     }
 }
 
 const mapDispatchToProps = {
-    loadFriendList,
-    setHeader
+    setHeader,
+    loadFriendList
 }
 
 function Friends(props) {
 
     const hasFriends = !!props.friendList.length;
     
-    if (!hasFriends) {
-        props.loadFriendList();
-    } else {
+    if (hasFriends) {
         props.setHeader(`Here is a list of ${props.username}'s friends`);
+    } else {
+        props.loadFriendList();
     }
 
     return hasFriends ? <FriendList friends={props.friendList} /> : <Preloader />
